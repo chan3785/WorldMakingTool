@@ -9,29 +9,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float lookSensitivity, cameraRotationLimit, currentCameraRotationX;
     [SerializeField]
     Camera theCamera;
-
+    bool isCollied;
+    [SerializeField] LayerMask layermask;
     Rigidbody myRigid;
+    Vector3 _velocity;
     void Start()
     {
         myRigid = GetComponent<Rigidbody>();
     }
-
-
     void Update()
     {
+        Move();
         if (Input.GetMouseButton(1))
         {
             CameraRotation();
             CharacterRotation();
         }
-        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
-        {
-            Move();
-        }
-        else
-        {
-            Freeze();
-        }
+        StopToWall();
+        Freeze();
     }
 
     void Move()
@@ -42,10 +37,17 @@ public class PlayerController : MonoBehaviour
         Vector3 _moveHorizontal = transform.right * _moveDirX;
         Vector3 _moveVertical = transform.forward * _moveDirZ;
 
-        Vector3 _velocity = (_moveHorizontal + _moveVertical).normalized * walkSpeed;
-        myRigid.MovePosition(transform.position + _velocity * Time.deltaTime);
+        _velocity = (_moveHorizontal + _moveVertical).normalized * walkSpeed;
+        if (!isCollied)
+        {
+            myRigid.MovePosition(transform.position + _velocity * Time.deltaTime);
+        }
     }
 
+    void StopToWall()
+    {
+        isCollied = Physics.Raycast(transform.position, _velocity, 1, layermask);
+    }
     void CharacterRotation()
     {
         float _yRotation = Input.GetAxisRaw("Mouse X");
@@ -68,8 +70,6 @@ public class PlayerController : MonoBehaviour
         myRigid.angularVelocity = Vector3.zero;
         myRigid.velocity = Vector3.zero;
     }
-    void FixedUpdate()
-    {
-        Freeze();
-    }
+
 }
+

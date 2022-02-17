@@ -20,7 +20,8 @@ public class Inventory : MonoBehaviour
     GameObject go_Preview;
     GameObject go_Prefab;
     GameObject clone;
-    [SerializeField] GameObject to_Destroy;
+    [SerializeField] GameObject escapeButton;
+    GameObject to_Destroy;
     [SerializeField] Transform tf_Player;
     RaycastHit hitinfo;
     [SerializeField] LayerMask layerMask, buildLayer;
@@ -39,8 +40,19 @@ public class Inventory : MonoBehaviour
             isPreviewActivated = true;
             currentRotation = Quaternion.identity;
         }
-
     }
+    void PreviewCancle()
+    {
+        if (isPreviewActivated)
+        {
+            escapeButton.SetActive(true);
+        }
+        if (!isPreviewActivated)
+        {
+            escapeButton.SetActive(false);
+        }
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab) && !isPreviewActivated)
@@ -54,24 +66,9 @@ public class Inventory : MonoBehaviour
             PreviewPositionUpdate();
         }
         RotateObject();
-
-        /*
-                if (Input.GetMouseButtonDown(0))
-                {
-                    if (EventSystem.current.IsPointerOverGameObject())
-                    {
-                        Debug.Log("Clicked on the UI");
-                    }
-                    else
-                        Build();
-                }
-        */
-
-        //if (Input.GetButtonDown("Fire1"))
-        //Build();
-
+        PreviewCancle();
     }
-    void Window()
+    public void Window()
     {
         if (!isActivated)
             OpenWindow();
@@ -193,7 +190,7 @@ public class Inventory : MonoBehaviour
             }
         }
     }
-    void Cancle()
+    public void Cancle()
     {
         if (isPreviewActivated)
             Destroy(go_Preview);
