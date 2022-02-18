@@ -19,16 +19,19 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        Move();
         if (Input.GetMouseButton(1))
         {
             CameraRotation();
             CharacterRotation();
         }
+        MoveControl();
+    }
+    public void MoveControl()
+    {
+        Move();
         StopToWall();
         Freeze();
     }
-
     void Move()
     {
         float _moveDirX = Input.GetAxisRaw("Horizontal");
@@ -43,7 +46,6 @@ public class PlayerController : MonoBehaviour
             myRigid.MovePosition(transform.position + _velocity * Time.deltaTime);
         }
     }
-
     void StopToWall()
     {
         isCollied = Physics.Raycast(transform.position, _velocity, 1, layermask);
@@ -70,6 +72,36 @@ public class PlayerController : MonoBehaviour
         myRigid.angularVelocity = Vector3.zero;
         myRigid.velocity = Vector3.zero;
     }
-
+    public void InputW()
+    {
+        Vector3 _velocity = transform.forward * walkSpeed;
+        if (!Physics.Raycast(transform.position, _velocity, 1, layermask))
+        {
+            myRigid.MovePosition(transform.position + _velocity * Time.deltaTime);
+        }
+    }
+    public void InputS()
+    {
+        Vector3 _velocity = -transform.forward * walkSpeed;
+        if (!Physics.Raycast(transform.position, _velocity, 1, layermask))
+        {
+            myRigid.MovePosition(transform.position + _velocity * Time.deltaTime);
+        }
+    }
+    public void InputA()
+    {
+        Vector3 _velocity = -transform.right * walkSpeed;
+        if (!Physics.Raycast(transform.position, _velocity, 1, layermask))
+        {
+            myRigid.MovePosition(transform.position + _velocity * Time.deltaTime);
+        }
+    }
+    public void InputD()
+    {
+        Vector3 _velocity = transform.right * walkSpeed;
+        if (!Physics.Raycast(transform.position, _velocity, 1, layermask))
+        {
+            myRigid.MovePosition(transform.position + _velocity * Time.deltaTime);
+        }
+    }
 }
-
