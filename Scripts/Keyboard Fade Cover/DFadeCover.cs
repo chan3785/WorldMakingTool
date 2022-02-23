@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class DFadeCover : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    bool isPressed = false;
+    bool isPressed;
     Image image1;
     void Start()
     {

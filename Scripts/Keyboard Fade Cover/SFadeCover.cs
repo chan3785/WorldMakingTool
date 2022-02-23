@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+
 public class SFadeCover : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     bool isPressed;
-    Image image1;
+    Image image;
     void Start()
     {
-        image1 = GetComponent<Image>();
+        image = GetComponent<Image>();
     }
     void Update()
     {
@@ -17,7 +18,7 @@ public class SFadeCover : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         {
             GameObject.Find("Player").GetComponent<PlayerController>().InputS();
         }
-        FadeW();
+        FadeS();
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -29,16 +30,16 @@ public class SFadeCover : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         isPressed = false;
     }
 
-    private void FadeW()
+    private void FadeS()
     {
-        Color color = image1.color;
+        Color color = image.color;
         if (Input.GetKey(KeyCode.S))
         {
             if (color.a > 0)
             {
                 color.a -= Time.deltaTime * 10f;
             }
-            image1.color = color;
+            image.color = color;
         }
         if (!Input.GetKey(KeyCode.S))
         {
@@ -46,7 +47,7 @@ public class SFadeCover : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             {
                 color.a += Time.deltaTime * 10f;
             }
-            image1.color = color;
+            image.color = color;
         }
     }
 }
