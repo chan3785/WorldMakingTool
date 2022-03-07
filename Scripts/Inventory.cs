@@ -28,7 +28,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] float range, angle;
     float rotateSpeed;
     int tagingnum = 0;
-
+    public GameObject to_Colorit;
     Quaternion currentRotation;
     public void SlotClick(int _slotNumber)
     {
@@ -206,5 +206,11 @@ public class Inventory : MonoBehaviour
         Physics.Raycast(tf_Player.position, tf_Player.forward, out hitinfo, range, buildLayer);
         to_Destroy = GameObject.Find(hitinfo.transform.name);
         Destroy(to_Destroy);
+    }
+    public async void ColorRay()
+    {
+        Physics.Raycast(tf_Player.position, tf_Player.forward, out hitinfo, range, buildLayer);
+        to_Colorit = GameObject.Find(hitinfo.transform.name);
+        to_Colorit.GetComponent<Renderer>().material.color = new Color(SliderController.color.r / 255, SliderController.color.g / 255, SliderController.color.b / 255);
     }
 }
