@@ -207,7 +207,7 @@ public class Inventory : MonoBehaviour
         to_Destroy = GameObject.Find(hitinfo.transform.name);
         Destroy(to_Destroy);
     }
-    public async void ColorRay()
+    public void ColorRay()
     {
         Physics.Raycast(tf_Player.position, tf_Player.forward, out hitinfo, range, buildLayer);
         to_Colorit = GameObject.Find(hitinfo.transform.name);
