@@ -6,11 +6,6 @@ public class ColorTab : MonoBehaviour
 {
     bool isActivated;
     [SerializeField] GameObject go_BaseUi;
-    void Start()
-    {
-
-    }
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.C))

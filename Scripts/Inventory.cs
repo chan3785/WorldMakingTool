@@ -24,7 +24,7 @@ public class Inventory : MonoBehaviour
     GameObject to_Destroy;
     [SerializeField] Transform tf_Player;
     RaycastHit hitinfo;
-    [SerializeField] LayerMask layerMask, buildLayer;
+    [SerializeField] LayerMask layerMask, buildLayer, colorLayer;
     [SerializeField] float range, angle;
     float rotateSpeed;
     int tagingnum = 0;
@@ -209,7 +209,7 @@ public class Inventory : MonoBehaviour
     }
     public void ColorRay()
     {
-        Physics.Raycast(tf_Player.position, tf_Player.forward, out hitinfo, range, buildLayer);
+        Physics.Raycast(tf_Player.position, tf_Player.forward, out hitinfo, range, colorLayer);
         to_Colorit = GameObject.Find(hitinfo.transform.name);
         to_Colorit.GetComponent<Renderer>().material.color = new Color(SliderController.color.r / 255, SliderController.color.g / 255, SliderController.color.b / 255);
     }
