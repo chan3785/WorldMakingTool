@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 [System.Serializable]
@@ -212,5 +210,6 @@ public class Inventory : MonoBehaviour
         Physics.Raycast(tf_Player.position, tf_Player.forward, out hitinfo, range, colorLayer);
         to_Colorit = GameObject.Find(hitinfo.transform.name);
         to_Colorit.GetComponent<Renderer>().material.color = new Color(SliderController.color.r / 255, SliderController.color.g / 255, SliderController.color.b / 255);
+        PreviewObject.SetColor(to_Colorit.GetComponent<Renderer>().material, to_Colorit.transform);
     }
 }

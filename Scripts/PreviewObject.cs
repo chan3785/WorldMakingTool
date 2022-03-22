@@ -20,15 +20,16 @@ public class PreviewObject : MonoBehaviour
     void ChangeColor()
     {
         if (colliderList.Count > 0)
-            SetColor(red);
+            SetColor(red, this.transform);
         else
-            SetColor(green);
+            SetColor(green, this.transform);
     }
-    void SetColor(Material mat)
+    public static void SetColor(Material mat, Transform tf_parameter)
     {
-        foreach (Transform tf_Child in this.transform)
+        foreach (Transform tf_Child in tf_parameter)
         {
             var newMaterials = new Material[tf_Child.GetComponent<Renderer>().materials.Length];
+
 
             for (int i = 0; i < newMaterials.Length; i++)
             {
