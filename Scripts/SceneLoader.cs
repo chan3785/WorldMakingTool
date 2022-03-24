@@ -50,7 +50,7 @@ public class SceneLoader : MonoBehaviour
     }
     public void ChangingEvent()
     {
-        Invoke("ChangeScene", 0.6f);
+        Invoke("ChangeScene", 0.7f);
     }
     void ChangeScene()
     {
